@@ -1,66 +1,57 @@
-def addnewcontact():
-    global count
-    print("Add Contact: \n")
-    name = input("Please enter the contact name:")
-    address = input("Please enter the contact's address:")
-    mobile_num = input("Please enter the contact's mobile number:")
+student_details = {}
 
+
+def remove():
     while True:
-        hobbies = input("Please enter a hobby(Enter 'end' to stop adding):")
-        if hobbies == 'end' or hobbies == "End":
-            print("Contact added!")
-            count += 1
+        print("Removing a Student Record:")
+        student = input("Enter the student name you want to remove (enter exit to return):")
+        rem = student.capitalize()
+        if rem in student_details.keys():
+            student = student.capitalize()
+            student_details.pop(student)
+            print("Student Record have been removed")
+            print(student_details)
+        elif student == "exit":
+            menu()
+            break
+
+
+def add():
+    # check = True
+    while True:
+        print("\nAdding New Student:")
+        name = input("Enter your name (enter exit to return): ")
+        course = input("Enter your course (enter exit to return):")
+        gpa = input("Enter your GPA (enter exit to return):")
+        if name.lower() == "exit" or course.lower() == "exit" or gpa.lower() == "exit":
+            # check = False
             break
         else:
-            contact.
-
-    menu(select)
-
-
-count = 0
-contact = {}
-select = 0
+            name = name.capitalize()
+            gpa = float(gpa)
+            student_details[name] = course, gpa
 
 
-# Main Menu
-def menu(option):
-    global select
-    print("Welcome to My Phone Directory:")
-    print("Number of contact in your directory : %d" % count)
-    print("These are the functions available:")
-    print("1. Add new contact")
-    print("2. Search for contact")
-    print("3. Display all contact details in directory")
-    print("4. Update existing contact details")
-    print("5. Remove existing contact")
-    print("0. Exit program")
-    select = int(input("Your selection please:"))
-    return option
 
-
-# Check which option user selected
-def checker():
-    # check if user selected is valid
-    if select in range(0, 6):
-        print(select)
-        # check if user input is search, update or remove
-        if select == 2 or select == 4 or select == 5:
-            # check if there are contact in the system
-            if count == 0:
-                print("That selection is not valid as your contact list is emtpy.")
-            elif select == 2:
-                print("Option 2 function currently not available.")
-            elif select == 4:
-                print("Option 4 function currently not available.")
-            else:
-                print("Option 5 function currently not available.")
-        elif select == 1:
-            addnewcontact()
-        elif select == 3:
-            print("Option 3 function is currently not available.")
+def menu():
+    while True:
+        print("Welcome to the student dictionary")
+        print("1. Add student")
+        print("2. Remove student")
+        print("3. View Dictionary")
+        print("0. Exit program")
+        option = int(input("Enter your choice:"))
+        if option == 1:
+            add()
+        elif option == 2:
+            remove()
+        elif option == 3:
+            print(student_details)
+        elif option == 0:
+            print("Goodbye~")
+            break
         else:
-            print("Option 0 function is currently not available.")
-    else:
-        print("Please enter a valid function options")
+            print("Please select a valid option")
 
-menu(select)
+
+menu()
