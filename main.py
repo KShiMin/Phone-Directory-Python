@@ -1,4 +1,8 @@
 # counter for number of contact there is in the system/ application
+import contextlib
+from typing import Container, ContextManager
+
+
 count = 0
 # create empty dictionary
 contact = {}
@@ -6,6 +10,21 @@ contact = {}
 
 # Search Function
 def search():
+    name = ""
+    mobile = 0
+    hobby = ""
+    contact_list = []
+
+    for key in contact:
+        row = []
+        row.append(key)
+        for item in contact.get(key):
+            row.append(item)
+        contact_list.append(row)
+
+    print(contact_list)
+    print("\n")
+
     while True:
         print("Search Contact:")
         print("Search By:")
@@ -14,19 +33,58 @@ def search():
         print("3. Hobbies")
         print("0. Return to main menu")
         choice = int(input("Your choice:"))
+        print("")
+
         if choice == 1:
-            name = input("Enter the name:").capitalize()
-            if name in contact:
-                print("Not available yet")
-            else:
-                print("Contact not found!\n")
+            name = input("Enter the name: ").capitalize()
+            print("")
+            for x in range(len(contact_list)):
+                if name in contact_list[x]:
+                    print("Name: %s" % contact_list[x][0])
+                    print("Address: %s" % contact_list[x][1])
+                    print("Mobile Number: %d" % contact_list[x][2])
+                    print("Hobbies : %s \n" % contact_list[x][3])
+                    break
+                elif(x == len(contact_list) - 1):
+                    print("Contact not found!\n")
+                    break
+                else:
+                    continue
+
         elif choice == 2:
-            mobile = int(input("Enter the mobile number:"))
-            print(contact.items())
-            if mobile in contact.items():
-                print("Not available yet")
-            else:
-                print("No contact with this number found!\n")
+            mobile = int(input("Enter the mobile number: "))
+            print("")
+            for x in range(len(contact_list)):
+                if mobile in contact_list[x]:
+                    print("Name: %s" % contact_list[x][0])
+                    print("Address: %s" % contact_list[x][1])
+                    print("Mobile Number: %d" % contact_list[x][2])
+                    print("Hobbies : %s \n" % contact_list[x][3])
+                    break
+                elif(x == len(contact_list) - 1):
+                    print("Contact not found!\n")
+                    break
+                else:
+                    continue
+
+        elif choice == 3:
+            hobby = input("Enter the hobby: ")
+            print("")
+            for x in range(len(contact_list)):
+                if hobby in contact_list[x][3]:
+                    print("Name: %s" % contact_list[x][0])
+                    print("Address: %s" % contact_list[x][1])
+                    print("Mobile Number: %d" % contact_list[x][2])
+                    print("Hobbies : %s \n" % contact_list[x][3])
+                    continue
+                elif(x == len(contact_list) - 1):
+                    print("Contact not found!\n")
+                    break
+                else:
+                    continue
+
+        # if choice == 1:
+        #     name = input("Enteer the name: ")
         #     if name in contact:
         #         name_add = contact[name][0]
         #         name_mobile = contact[name][1]
@@ -53,12 +111,6 @@ def search():
         #         # If mobile number not in contact list
         #         elif mobile != dict_mobile and key == len(contact):
         #             print("No contact with this number found!\n")
-        elif choice == 3:
-            hobby = input("Enter the hobby:")
-            if hobby in contact:
-                print("Not available yet")
-            else:
-                print("No contact with this hobby found!\n")
         elif choice == 0:
             break
         else:
@@ -78,8 +130,9 @@ def newcontact():
         hobby = input("Please enter a hobby(Enter 'end' to stop adding):")
         if hobby.lower() == 'end':
             contact[name.capitalize()] = address, mobile_num, hobbies
-            print("Contact added!")
+            print("Contact added!\n")
             print(contact)
+            print("")
             count += 1
             break
         else:
@@ -116,6 +169,7 @@ def menu():
         print("5. Remove existing contact")
         print("0. Exit program")
         select = int(input("Your selection please:"))
+        print("")
         # check if user input is search, update or remove
         if select == 0:
             print("Thank you and see you again~")
