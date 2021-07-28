@@ -10,20 +10,13 @@ contact = {}
 
 # Search Function
 def search():
-    name = ""
-    mobile = 0
-    hobby = ""
     contact_list = []
-
     for key in contact:
         row = []
         row.append(key)
         for item in contact.get(key):
             row.append(item)
         contact_list.append(row)
-
-    print(contact_list)
-    print("\n")
 
     while True:
         print("Search Contact:")
