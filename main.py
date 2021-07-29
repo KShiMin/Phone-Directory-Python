@@ -8,36 +8,72 @@ contact = {}
 def update():
     print("Update Contact:")
     print("")
-    update_contact = input("Please enter the name of the contact you would like to update: ").capitalize()
-    for key, value in contact.items():
-        if update_contact == key:
-            print("Name: ", key)
-            print("Address: ", value[0])
-            print("Mobile Number: ", value[1])
-            print("Hobbies: ", value[2])
-            print("")
-            print("Contact Exist")
+    update_contact = input(
+        "Please enter the name of the contact you would like to update: ").capitalize()
+    # if else to check if user input in name
+    if update_contact in contact:
+        # display found contact
+        print("Contact Exist!")
+        print("Name: %s" % update_contact)
+        print("Address: %s" % contact[update_contact][0])
+        print("Mobile Number: %d" % contact[update_contact][1])
+        print("Hobbies: ", contact[update_contact][2])
+        print("")
+
+        # while loop to prompt user for input till exit
+        while True:
             print("1. Address")
             print("2. Mobile Number")
             print("3. Hobbies")
             print("0. Exit")
             update_option = int(input("What would you like to update?: "))
-            if update_option == 1:
-                print("Update address not available yet")
-            elif update_option == 2:
-                print(type(value[1]))
-                new_mobile = int(input("Enter the new mobile number: "))
-                value[1] = new_mobile
-                print(contact)
-            elif update_option == 3:
-                print("Update hobbies not available yet")
-            elif update_option == 0:
+            print("")
+
+            # if else to calculate choice 
+            if update_option == 0: # exit menu 
                 break
+            elif update_option == 1: # change add
+                update_add = input("Enter new address: ")
+                contact[update_contact][0] = update_add
+            elif update_option == 2: # change num 
+                pass
+            elif update_option == 3: # change hobbies
+                pass
             else:
-                print("Please enter a valid option")
-            break
-        else:
-            print("No such contact found.")
+                print("Invalid option!")
+
+    else:
+        print("Contact not found!")
+
+    # for key, value in contact.items():
+        # if update_contact == key:
+        #     print("Name: ", key)
+        #     print("Address: ", value[0])
+        #     print("Mobile Number: ", value[1])
+        #     print("Hobbies: ", value[2])
+        #     print("")
+        #     print("Contact Exist")
+        #     print("1. Address")
+        #     print("2. Mobile Number")
+        #     print("3. Hobbies")
+        #     print("0. Exit")
+        #     update_option = int(input("What would you like to update?: "))
+        #     if update_option == 1:
+        #         print("Update address not available yet")
+        #     elif update_option == 2:
+        #         print(type(value[1]))
+        #         new_mobile = int(input("Enter the new mobile number: "))
+        #         value[1] = new_mobile
+        #         print(contact)
+        #     elif update_option == 3:
+        #         print("Update hobbies not available yet")
+        #     elif update_option == 0:
+        #         break
+        #     else:
+        #         print("Please enter a valid option")
+        #     break
+        # else:
+        #     print("No such contact found.")
 
     # while True:
     #     print("Contact Exist")
@@ -59,7 +95,6 @@ def update():
     #     else:
     #         print("Please enter a valid option")
 
-
     # for x in range(len(contact)):
     #     print(x)
     #     print(len(contact))
@@ -79,7 +114,6 @@ def update():
     #         print("Mobile Number: ", value[1])
     #         print("Hobbies: ", value[2])
     #         print("")
-
 
 
 # Display Function
