@@ -11,7 +11,7 @@ def loadFromFile():
         for line in lines:
             temp = [value for value in line.split()]
             contact[temp[0]] = {
-                "add": temp[1], "mobile": temp[2], "hobby": temp[3]}
+                "add": temp[1], "mobile": int(temp[2]), "hobby": temp[3]}
             count += 1
 
 
@@ -123,6 +123,7 @@ def display():
 
 # Search Function
 def search():
+    global count
     # menu for search function
     while True:
         print("\nSearch Contact:")
@@ -133,8 +134,6 @@ def search():
         print("0. Return to main menu")
         choice = int(input("Your choice:"))
         print("")
-        # counter to check if it's at the last loop
-        counter = 0
         if choice == 1:
             name = input("Enter the name: ").capitalize()
             for key in contact:
@@ -152,9 +151,10 @@ def search():
                 else:
                     continue
         elif choice == 2:
+            counter = 0
             mobile = int(input("Enter the mobile number: "))
             for key in contact:
-                print(contact[key].values())
+                counter += 1
                 if mobile == contact[key]["mobile"]:
                     print("\nContact Details:")
                     print("Name: ", key)
@@ -163,28 +163,28 @@ def search():
                     print("Hobbies: ", contact[key]["hobby"])
                     break
                 # check if the loop is at the final loop
-                elif mobile != contact[key]["mobile"]:
+                elif counter == count:
                     print("No contact with this number found\n")
                     break
                 else:
                     continue
         elif choice == 3:
+            counter = 0
             hob = input("Enter the hobby: ")
             for key in contact:
-                # loop through 2nd dictionary key "hobby" list
-                for x in contact[key]["hobby"]:
-                    if hob == x:
-                        print("\nContact Details:")
-                        print("Name: ", key)
-                        print("Address: ", contact[key]["add"])
-                        print("Mobile Number: ", contact[key]["mobile"])
-                        print("Hobbies: ", contact[key]["hobby"])
-                        break
-                    # check if the loop is at the final loop
-                    elif counter == (len(contact) - 1):
-                        print("No contact with this hobby found\n")
-                    else:
-                        continue
+                counter += 1
+                if hob in contact[key]["hobby"]:
+                    print("\nContact Details:")
+                    print("Name: ", key)
+                    print("Address: ", contact[key]["add"])
+                    print("Mobile Number: ", contact[key]["mobile"])
+                    print("Hobbies: ", contact[key]["hobby"])
+                    continue
+                elif counter == count:
+                    print("No contact with this hobby found\n")
+                    break
+                else:
+                    continue
         elif choice == 0:
             break  # return to main menu
         else:
