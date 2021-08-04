@@ -4,29 +4,6 @@ count = 0
 contact = {}
 
 
-def loadFromFile():
-    global count
-    with open('C:\GitHub\Phone-Directory-Python\contact.txt', 'r') as f:
-        lines = f.readlines()
-        for line in lines:
-            temp = [value for value in line.split()]
-            contact[temp[0]] = {
-                "add": temp[1], "mobile": int(temp[2]), "hobby": temp[3]}
-            count += 1
-
-
-def writeToFile():
-    # open file with write only permission
-    with open('C:\GitHub\Phone-Directory-Python\contact.txt', 'w') as f:
-        # outer for loop to loop through key in contact
-        for key in contact:
-            f.write(key)
-            # inner for loop to loop through key dictionary to get all values
-            for value in contact[key].values():
-                f.write(" " + str(value))
-            f.write("\n")
-
-
 # Remove Function
 def remove():
     global count
@@ -64,7 +41,7 @@ def update():
     print("Update Contact: \n")
     update_contact = input("Please enter the name of the contact you would like to update: ").capitalize()
     counter = 0
-    # for loop to loop through contact 
+    # for loop to loop through contact
     for key, value in contact.items():
         counter += 1
         if update_contact == key:
@@ -94,7 +71,7 @@ def update():
 
                 elif update_option == 3:
                     print("!!Note that everything will be rewritten!!")
-                    hobbies = []        # create hobbies list again to store the new hobbies
+                    hobbies = []  # create hobbies list again to store the new hobbies
                     while True:
                         new_hobby = input("Please enter new hobbies:(Enter 'end' to stop adding):")
                         if new_hobby.lower() == 'end':
@@ -190,7 +167,7 @@ def search():
                     print("Address: ", contact[key]["add"])
                     print("Mobile Number: ", contact[key]["mobile"])
                     print("Hobbies: ", contact[key]["hobby"])
-                    continue        # stop at this line and repeat loop
+                    continue  # stop at this line and repeat loop
                 # check if the loop is at the final loop
                 elif counter == count:
                     print("No contact with this hobby found\n")
@@ -201,7 +178,6 @@ def search():
             break  # return to main menu
         else:
             print("Please select a valid option")
-
 
 
 # Adding new contact function
@@ -246,7 +222,6 @@ def checker(option):
 # Main Menu function
 def menu():
     check = [2, 4, 5]
-    loadFromFile()
     while True:
         print("Welcome to My Phone Directory:")
         print("Number of contact in your directory : %d" % count)
@@ -261,7 +236,6 @@ def menu():
         print("")
         if select == 0:
             print("Thank you and see you again~")
-            writeToFile()
             break
         # check if user input is search, update or remove
         elif count == 0 and select in check:
