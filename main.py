@@ -63,11 +63,13 @@ def update():
                     new_add = input("Enter the new address: ")
                     contact[key]["add"] = new_add
                     print("Address updated!\n")
+                    break
 
                 elif update_option == 2:
                     new_mobile = int(input("Enter the new mobile number: "))
                     contact[key]["mobile"] = new_mobile
                     print("Mobile number updated!\n")
+                    break
 
                 elif update_option == 3:
                     print("!!Note that everything will be rewritten!!")
