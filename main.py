@@ -1,8 +1,9 @@
+
+
 # counter for number of contact there is in the system/ application
 count = 0
 # create empty dictionary
 contact = {}
-
 
 # Remove Function
 def remove():
@@ -10,6 +11,7 @@ def remove():
     print("Remove Contact: \n")
     remove_contact = input("Please enter the contact name you want to remove: ").capitalize()
     counter = 0
+    # Loop through keys in first dictionary
     for key in contact:
         counter += 1
         if remove_contact == key:
@@ -18,10 +20,13 @@ def remove():
             print("Address: ", contact[key]["add"])
             print("Mobile Number: ", contact[key]["mobile"])
             print("Hobbies: ", contact[key]["hobby"])
+            # while loop to ensure user input the correct confirmation option
             while True:
                 confirmation = input(" Is this the contact you want to remove? (Yes/No): ")
                 if confirmation.lower() == "yes":
+                    # removes the key as well as the values associated with the key
                     contact.pop(key)
+                    print("Contact Removed!")
                     count -= 1
                     break
                 elif confirmation.lower() == "no":
@@ -75,7 +80,7 @@ def update():
                     print("!!Note that everything will be rewritten!!")
                     hobbies = []  # create hobbies list again to store the new hobbies
                     while True:
-                        new_hobby = input("Please enter new hobbies:(Enter 'end' to stop adding):")
+                        new_hobby = input("Please enter new hobbies (Enter 'end' to stop adding):")
                         if new_hobby.lower() == 'end':
                             contact[key]["hobby"] = hobbies
                             print("Hobbies updated!\n")
@@ -83,12 +88,12 @@ def update():
                         else:
                             hobbies.append(new_hobby)
                     break
-
                 elif update_option == 0:
                     break
                 else:
                     print("Please enter a valid option.\n")
-        # check if for loop is at the final loop
+            break
+        # check with count (no. of contact there is in the directory) and see if it's at the final loop
         elif counter == count:
             print("No such contact found.\n")
         else:
@@ -126,10 +131,12 @@ def search():
         print("")
         if choice == 1:
             name = input("Enter the name: ").capitalize()
+            #  looping through keys in first dictionary
             for key in contact:
                 if name == key:
                     print("\nContact Details:")
                     print("Name: ", key)
+                    # get first dictionary key value and second dictionary key value
                     print("Address: ", contact[key]["add"])
                     print("Mobile Number: ", contact[key]["mobile"])
                     print("Hobbies: ", contact[key]["hobby"])
@@ -141,10 +148,13 @@ def search():
                 else:
                     continue
         elif choice == 2:
+            # counter set to count the amount of time it looped
             counter = 0
             mobile = int(input("Enter the mobile number: "))
+            #  looping through keys in first dictionary
             for key in contact:
                 counter += 1
+                # check if mobile input is the same as the value of second dictionary "mobile" key
                 if mobile == contact[key]["mobile"]:
                     print("\nContact Details:")
                     print("Name: ", key)
@@ -152,13 +162,15 @@ def search():
                     print("Mobile Number: ", contact[key]["mobile"])
                     print("Hobbies: ", contact[key]["hobby"])
                     break
-                # check if the loop is at the final loop
+                # check with count (no. of contact there is in the directory) and see if it's at the final loop
                 elif counter == count:
                     print("No contact with this number found\n")
                     break
                 else:
                     continue
         elif choice == 3:
+            # counter set to count the amount of time it looped
+            cleared = 0
             counter = 0
             hob = input("Enter the hobby: ")
             for key in contact:
@@ -169,9 +181,10 @@ def search():
                     print("Address: ", contact[key]["add"])
                     print("Mobile Number: ", contact[key]["mobile"])
                     print("Hobbies: ", contact[key]["hobby"])
+                    cleared += 1
                     continue  # stop at this line and repeat loop
-                # check if the loop is at the final loop
-                elif counter == count:
+                # check with count (no. of contact there is in the directory) and see if it's at the final loop
+                elif cleared == 0 and counter == count:
                     print("No contact with this hobby found\n")
                     break
                 else:
@@ -191,17 +204,30 @@ def newcontact():
     name = input("Please enter the contact name:")
     address = input("Please enter the contact's address:")
     mobile_num = int(input("Please enter the contact's mobile number:"))
+    validation()
+    # Data validation
+    # while True:
+    #     try:
+    #         mobile_num = int(input("Please enter the contact's mobile number:"))
+    #         if len(str(mobile_num)) < 8:
+    #             print("Please enter a valid mobile number")
+    #             continue
+    #         break
+    #     except ValueError:
+    #         print("Enter a valid mobile number")
     while True:
-        hobby = input("Please enter a hobby(Enter 'end' to stop adding):")
+        hobby = input("Please enter a hobby (Enter 'end' to stop adding):")
         if hobby.lower() == 'end':
-            contact[name.capitalize()] = {
-                "add": address, "mobile": mobile_num, "hobby": hobbies}
+            # storing name input by user as the key of the outer dictionary
+            # and all the other input as key for second dictionary
+            contact[name.capitalize()] = {"add": address, "mobile": mobile_num, "hobby": hobbies}
             print("Contact added!")
-            print(contact)
             print("")
+            # change the contact there is in phone directory
             count += 1
             break
         else:
+            # add user hobby input into the list
             hobbies.append(hobby)
 
 
@@ -223,6 +249,7 @@ def checker(option):
 
 # Main Menu function
 def menu():
+    # store search, update or remove number into a list
     check = [2, 4, 5]
     while True:
         print("Welcome to My Phone Directory:")
@@ -239,11 +266,13 @@ def menu():
         if select == 0:
             print("Thank you and see you again~")
             break
-        # check if user input is search, update or remove
+        # check if user input matches one of the item stored in "check" list and the contact is 0
         elif count == 0 and select in check:
             print("The selection is not valid as your contact list is emtpy.\n")
         else:
+            # call checker function and pass in select value
             checker(select)
 
 
+# call menu to display content
 menu()
