@@ -1,11 +1,29 @@
-# Name : Koh Shi Min
-# Admin No. : 201357X
-# Group : BA2101
-
 # variable name for number of contact there is in the system/ application
 count = 0
 # create empty dictionary
 contact = {}
+
+# def loadFromFile():
+#     global count
+#     with open('C:\GitHub\Phone-Directory-Python\contact.txt', 'r') as f:
+#         lines = f.readlines()
+#         for line in lines:
+#             temp = [value for value in line.split()]
+#             contact[temp[0]] = {
+#                 "add": temp[1], "mobile": int(temp[2]), "hobby": temp[3]}
+#             count += 1
+
+
+# def writeToFile():
+#     # open file with write only permission
+#     with open('C:\GitHub\Phone-Directory-Python\contact.txt', 'w') as f:
+#         # outer for loop to loop through key in contact
+#         for key in contact:
+#             f.write(key)
+#             # inner for loop to loop through key dictionary to get all values
+#             for value in contact[key].values():
+#                 f.write(" " + str(value))
+#             f.write("\n")
 
 
 # Remove Function
